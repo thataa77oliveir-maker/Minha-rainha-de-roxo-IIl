@@ -1,0 +1,1198 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#4b245f">
+<title>Minha Rainha de Roxo III 💜</title>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: #29172f;
+  color: #432d28;
+  font-family: Georgia, "Times New Roman", serif;
+  padding: 18px 12px 28px;
+}
+
+header {
+  text-align: center;
+  color: #f8e8c8;
+  margin: 8px auto 20px;
+}
+
+header h1 {
+  font-size: clamp(27px, 7vw, 38px);
+  margin: 0 0 8px;
+  line-height: 1.2;
+}
+
+header p {
+  font-size: 15px;
+  margin: 0;
+  color: #e4cce9;
+}
+
+.book {
+  position: relative;
+  width: 100%;
+  max-width: 650px;
+  min-height: 570px;
+  margin: 0 auto;
+  padding: 32px 23px 25px;
+  border: 1px solid #d4b986;
+  border-radius: 5px 15px 15px 5px;
+  background:
+    radial-gradient(ellipse at top left, #fff6dd 0%, transparent 55%),
+    linear-gradient(105deg, #e8d4ac, #f8edcf 12%, #f5e8c8 88%, #ddc49a);
+  box-shadow:
+    inset 7px 0 12px #b69a6c55,
+    0 12px 35px #0006;
+  overflow-wrap: anywhere;
+}
+
+.book::before {
+  content: "";
+  position: absolute;
+  left: 10px;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: #bda47880;
+}
+
+.decoration {
+  text-align: center;
+  font-size: 23px;
+  letter-spacing: 7px;
+  margin: 0 0 18px;
+}
+
+#chapterLabel {
+  text-align: center;
+  color: #74467e;
+  font-size: 13px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin: 0 0 12px;
+}
+
+#pageTitle {
+  text-align: center;
+  font-size: clamp(23px, 6vw, 30px);
+  line-height: 1.3;
+  color: #542c65;
+  margin: 0 0 22px;
+}
+
+#pageText {
+  font-size: 19px;
+  line-height: 1.85;
+  white-space: pre-line;
+  text-align: left;
+  min-height: 320px;
+}
+
+#pageText p {
+  margin: 0 0 18px;
+  text-indent: 1em;
+}
+
+#pageText .opening {
+  text-indent: 0;
+  text-align: center;
+  font-style: italic;
+  color: #75536e;
+}
+
+.page-footer {
+  text-align: center;
+  color: #826b52;
+  font-size: 13px;
+  margin-top: 25px;
+}
+
+.controls {
+  max-width: 650px;
+  margin: 20px auto 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+button {
+  border: 1px solid #b99ac5;
+  border-radius: 24px;
+  padding: 13px 19px;
+  background: #663b76;
+  color: white;
+  font-family: inherit;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+button:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+#pageCounter {
+  text-align: center;
+  color: #f4e4f6;
+  font-size: 14px;
+  flex: 1;
+}
+
+.progress-track {
+  max-width: 650px;
+  height: 4px;
+  background: #654c69;
+  margin: 14px auto;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+#progress {
+  height: 100%;
+  width: 0;
+  background: #e5c0f0;
+  transition: width .25s;
+}
+
+.end-note {
+  text-align: center;
+  color: #f4e4f6;
+  margin: 24px auto 0;
+  font-size: 14px;
+}
+
+@media (max-width: 420px) {
+  body {
+    padding: 12px 8px 24px;
+  }
+
+  .book {
+    padding: 25px 18px 22px;
+    min-height: 530px;
+  }
+
+  #pageText {
+    font-size: 18px;
+    line-height: 1.8;
+  }
+
+  button {
+    padding: 12px 14px;
+    font-size: 14px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>Minha Rainha de Roxo III 💜</h1>
+  <p>Uma história escrita com amor, por Tayanee, para Hemmilly</p>
+</header>
+
+<main>
+  <section class="book" aria-live="polite">
+    <div class="decoration">💜 🧸 🦋 💜</div>
+    <div id="chapterLabel"></div>
+    <h2 id="pageTitle">Minha Rainha de Roxo III</h2>
+    <div id="pageText"></div>
+    <div class="page-footer">Feito com amor, para você 💜</div>
+  </section>
+
+  <div class="controls">
+    <button id="prevBtn" onclick="changePage(-1)">← Voltar</button>
+    <span id="pageCounter">Página 1</span>
+    <button id="nextBtn" onclick="changePage(1)">Avançar →</button>
+  </div>
+
+  <div class="progress-track">
+    <div id="progress"></div>
+  </div>
+
+  <p class="end-note">Cada página guarda um pedacinho do nosso amor. 💌</p>
+</main>
+
+<script>
+const chapters = [
+{
+  title: "Antes de Fazer a Pergunta",
+  text: `Eu não sabia se o segundo livro havia mudado alguma coisa dentro de você. Não sabia se, ao ler cada palavra, você tinha enxergado o meu amor de uma maneira diferente ou se o seu coração simplesmente estava começando a me permitir chegar um pouquinho mais perto. Eu só sabia que, de alguma forma, você parecia mais aberta para mim.
+
+E eu continuava ali, apaixonada por você, tentando entender como era possível sentir tanto por alguém e ainda não poder chamar essa pessoa de minha namorada.
+
+Às vezes, eu olhava para a sua mão e imaginava uma aliança ali. Uma aliança dada por mim. Não precisava ser a mais cara, nem a mais bonita do mundo. Para mim, bastava que ela carregasse o significado de uma escolha: você e eu, decidindo viver esse amor juntas.
+
+Eu imaginava como seria poder olhar para você e saber que, além de todos os sentimentos que já existiam entre nós, agora havia também uma promessa. Como seria poder dizer que você era minha namorada, minha mulher, a pessoa com quem eu queria compartilhar os meus dias.
+
+Mas a realidade ainda era diferente dos meus pensamentos.
+
+Quando você saía, eu sentia falta daquela pequena certeza que tanto desejava. Não porque você precisasse provar o seu amor para outras pessoas, mas porque eu queria que aquilo que existia entre nós pudesse finalmente ter um nome. Queria que o mundo soubesse que o seu coração tinha alguém, embora eu também soubesse que uma aliança, sozinha, nunca seria capaz de garantir isso.
+
+E então existia o meu medo.
+
+Você dizia que não estava pronta para namorar. Dizia que, se eu pedisse, não aceitaria. E como eu poderia reunir coragem para fazer a pergunta que mais desejava ouvir respondida, se você mesma já havia me preparado para um possível não?
+
+Eu tinha medo de perder até aquilo que já possuíamos. Medo de apressar as coisas. Medo de descobrir que, enquanto eu sonhava com um futuro ao seu lado, você ainda não conseguia imaginar o mesmo futuro comigo.
+
+Por isso, eu não pedia.
+
+Talvez você também estivesse esperando. Talvez tivesse os seus próprios receios, as suas dúvidas e o seu tempo. Eu não podia conhecer todos os pensamentos que passavam pela sua cabeça. Só podia falar dos meus, das minhas vontades e daquele sentimento enorme que crescia cada vez que eu olhava para você.
+
+Porque, meu Deus, como eu amava você!
+
+Era estranho pensar que duas pessoas podiam sentir tanto, compartilhar tantos momentos e desejar estar juntas, enquanto uma simples pergunta continuava sem ser feita.
+
+Eu não queria apenas um título. Queria a experiência de viver esse amor com você. Queria construir lembranças, segurar sua mão sem precisar esconder a importância daquele gesto e descobrir como seria chamar de namoro aquilo que já ocupava tanto espaço no meu coração.
+
+Eu queria você.
+
+E talvez essa fosse a parte mais difícil de tudo: eu tinha tanta certeza do que sentia, mas não tinha a mesma certeza sobre o que aconteceria quando finalmente criasse coragem.
+
+Então, depois da última página do nosso segundo livro, a nossa história continuou assim: entre os meus sonhos, as suas palavras, as oportunidades que eu não sabia se deveria aproveitar e uma pergunta que permanecia guardada dentro de mim.
+
+Eu ainda não sabia quando teria coragem.
+
+Ainda não sabia o que você responderia.
+
+Mas, se havia algo que eu sabia naquele momento, era que o meu coração já imaginava um futuro no qual eu não precisaria mais sonhar com uma aliança na sua mão.
+
+Eu só queria descobrir se você também sonhava com esse futuro.
+
+E, sem que eu soubesse exatamente quando ou como, a nossa história continuava caminhando em direção a uma resposta.
+
+Uma resposta que eu desejava mais do que conseguia explicar.
+
+Porque, antes de sermos oficialmente namoradas, já existia uma história inteira dentro de mim que só queria encontrar um lugar para chamar de nossa. 💜`
+},
+{
+  title: "O Dia em Que Você Disse Sim",
+  text: `Era por volta de uma hora da tarde quando tive a ideia de preparar algo especial para você. Eu estava com dinheiro e, quando tenho algum dinheiro e penso em você, muitas vezes a primeira coisa que quero fazer é comprar alguma coisa que te deixe feliz.
+
+Naquele momento, eu só queria presentear minha mulher.
+
+Saí praticamente voando pela rua. Fui comprar flores, papel para montar o buquê e alguns doces. Tudo precisava acontecer depressa, porque a ideia tinha surgido quase em cima da hora, mas eu queria que você recebesse alguma coisa feita com amor.
+
+E eu consegui preparar o presente.
+
+Só que havia um pequeno detalhe que eu tinha esquecido.
+
+Eu esqueci de pedir você em namoro.
+
+Sim, eu consegui preparar flores, doces e um presente especial, mas esqueci justamente de fazer a pergunta que tanto queria fazer! 😭
+
+Quando entreguei tudo a você, você ainda estava estressada comigo porque eu havia me atrasado para buscá-la. Mesmo assim, aquele presente carregava um sentimento que eu não conseguia colocar inteiramente em palavras.
+
+Depois, você comentou que havia pensado que, junto com aqueles presentes, viria também o pedido de namoro.
+
+E foi aí que alguma coisa dentro de mim se iluminou.
+
+Talvez você também estivesse esperando por aquele momento. Talvez aquela pergunta que eu tinha tanto medo de fazer fosse justamente a que você desejava ouvir.
+
+Eu precisava tentar.
+
+Naquele mesmo dia, comprei as alianças e uma caixinha. Minha cabeça estava cheia de pensamentos, meu coração parecia não saber ficar quieto e eu ainda tinha medo de que tudo aquilo terminasse de uma maneira diferente da que eu sonhava.
+
+Eu tinha imaginado tantos cenários, mas nenhum deles me preparou para o que realmente aconteceu.
+
+Chamei você para vir à minha casa. Eu já estava com as alianças e, dessa vez, não queria deixar o momento passar sem fazer a pergunta.
+
+Quando você chegou, começamos a conversar.
+
+Eu disse que precisava falar algumas coisas com você. Você não imaginava o que estava prestes a acontecer. Então, enquanto conversávamos, fui colocando para fora tudo aquilo que estava guardado dentro de mim.
+
+Eu chorei.
+
+Chorei porque havia sentimentos que eu já não conseguia guardar, medos que eu precisava dividir e palavras que eu queria que você finalmente entendesse. Naquele momento, não queria fingir ser forte nem esconder o tamanho do que sentia. Queria apenas que você me ouvisse e conhecesse um pouco mais do que existia dentro do meu coração.
+
+E você ficou ali, comigo.
+
+Você me ouviu, me compreendeu e esteve ao meu lado enquanto eu desabafava.
+
+Talvez você não soubesse, mas aquela conversa já significava muito para mim. Eu estava mostrando uma parte vulnerável de quem eu era, deixando que você enxergasse minhas inseguranças e tudo aquilo que eu tinha medo de dizer.
+
+Então chegou a hora.
+
+Peguei a caixinha das alianças.
+
+Você não estava acreditando no que estava acontecendo. E eu, mesmo tendo planejado aquele momento, ainda carregava o medo de ouvir um não.
+
+Era estranho. Eu havia comprado as alianças, preparado o presente e imaginado aquela cena tantas vezes, mas, quando finalmente estava diante de você, ainda tinha medo de que o meu sonho não se realizasse.
+
+Mesmo assim, perguntei.
+
+Perguntei se você queria namorar comigo.
+
+E você disse que sim.
+
+Você queria.
+
+Por alguns instantes, pareceu difícil acreditar que aquilo estava realmente acontecendo. A resposta que eu tanto desejava ouvir finalmente havia chegado. A pergunta que eu carregava comigo havia se transformado em uma lembrança real, uma daquelas que eu sabia que guardaria por muito tempo.
+
+Eu estava tão feliz!
+
+Finalmente, eu podia olhar para você sabendo que havíamos dado aquele passo juntas. Finalmente, eu podia chamar você de minha namorada, não apenas nos meus pensamentos, mas na nossa vida.
+
+E sabe o que torna essa lembrança ainda mais especial?
+
+Naquele dia, você chegou à minha casa usando a camisa da sua madrinha, que já havia falecido. Antes mesmo de pedir você em namoro, durante a nossa conversa, eu tinha contado que queria pedir a autorização dela para viver esse amor com você.
+
+Então, quando percebi que você estava usando aquela camisa, aproveitei aquele instante.
+
+Pedi a bênção da sua madrinha. Disse que queria fazer você feliz.
+
+Não sei como explicar tudo o que aquele gesto significou para mim. Eu só sabia que você era alguém muito importante na minha vida e que queria tratar o seu coração com carinho. Queria que você soubesse que meus sentimentos não eram apenas palavras bonitas ou promessas feitas no calor de um momento.
+
+Eu queria construir algo verdadeiro com você.
+
+E naquele dia, enquanto você estava feliz e eu tentava acreditar na felicidade que estava sentindo, uma nova página se abriu para nós duas.
+
+As flores foram compradas às pressas. Os doces vieram de uma ideia inesperada. As alianças foram compradas naquele mesmo dia. O pedido não aconteceu exatamente como eu tinha imaginado, mas talvez fosse justamente por isso que ele se tornou tão nosso.
+
+Porque o amor não precisa que todos os detalhes saiam como planejamos para que um momento seja inesquecível.
+
+Às vezes, ele acontece no meio da correria, depois de uma conversa sincera, entre lágrimas, nervosismo e uma pergunta que finalmente encontra coragem para sair.
+
+E a resposta muda tudo.
+
+Naquele dia, eu não ganhei apenas um sim.
+
+Ganhei a lembrança do momento em que você aceitou viver essa nova fase comigo. Ganhei uma história para contar, uma aliança para guardar como símbolo do nosso compromisso e a felicidade de saber que, depois de tanto imaginar como seria, finalmente estávamos namorando.
+
+Eu tinha passado tanto tempo desejando aquele momento que, quando ele chegou, só conseguia pensar em uma coisa:
+
+Eu consegui. Eu finalmente pedi a mulher que amo em namoro, e ela aceitou.
+
+E, meu Deus, como valeu a pena esperar por esse dia.
+
+Porque a menina que antes tinha medo de fazer a pergunta agora tinha uma namorada.
+
+E essa namorada era você.
+
+Minha Hemmilly. Minha rainha de roxo. A mulher com quem eu tanto sonhei viver essa história.
+
+Naquele dia, a nossa história não terminou com um final feliz.
+
+Ela começou uma nova fase.
+
+E, pela primeira vez, eu não precisava imaginar como seria ter você como minha namorada. Eu podia simplesmente olhar para você e agradecer por estarmos vivendo aquilo juntas. 💜💍`
+},
+{
+  title: "Quando a Vida Nos Pôs à Prova",
+  text: `“Eu queria compartilhar a alegria da minha vida com você. Nunca imaginei que aquele dia também se tornaria uma das lembranças mais difíceis da nossa história.”
+
+Eu me lembro de como queria que você fosse comigo para o interior.
+
+Eu estava com muita vontade de jogar bola e queria mostrar a você um lugar onde me sinto bem, onde as pessoas me recebem com carinho e me tratam tão bem. Queria que você conhecesse um pouco mais daquele lado da minha vida, que pudesse ver com os próprios olhos como eu era recebida ali e entendesse por que aquele lugar significava tanto para mim.
+
+Mas você não estava muito animada para ir. Queria que eu ficasse e não parecia querer fazer aquela viagem.
+
+Mesmo assim, insisti. Eu queria muito ter você comigo naquele dia e disse que, se você não fosse, eu iria sozinha. Depois de um tempo, você decidiu ir.
+
+E fomos nós duas.
+
+Jogamos bola, compartilhamos aquele momento e, durante o jogo, acabei me machucando. Ainda assim, isso não impediu que continuássemos o nosso dia.
+
+Naquele momento, eu não fazia ideia de que a volta para casa se tornaria uma lembrança tão difícil de esquecer.
+
+Estávamos na moto quando um carro bateu na gente, atingindo a parte da frente da moto. De repente, tudo o que parecia ser apenas mais um dia da nossa história se transformou em preocupação.
+
+Eu me lembro de ouvir você dizendo:
+
+“Amor, por favor, para a moto. Minha perna, minha perna!”
+
+E eu parei.
+
+Não fiquei pensando no que fazer depois, nem no que poderia acontecer. Minha primeira reação foi parar e ir até você. Eu precisava ver como você estava, precisava olhar para você e entender o que tinha acontecido.
+
+Sua perna estava machucada, e meu braço também tinha se ferido um pouco. Ainda assim, fomos verificar se as pessoas que estavam no carro estavam bem.
+
+Depois, seguimos para casa para buscar nossos documentos antes de irmos ao hospital.
+
+Eu estava desesperada. Você parecia estar mais tranquila naquele momento, mas eu estava preocupada com tudo. Preocupada com você, comigo, com o que tinha acabado de acontecer e com aquilo que ainda precisaríamos enfrentar.
+
+Quando chegou a hora de ir ao hospital, você não queria entrar comigo. Dizia que queria apenas me acompanhar. Mas minha mãe viu que você estava ali e quis que entrasse também.
+
+E você entrou.
+
+Naquele momento, estávamos juntas, conversando e tentando lidar com tudo o que havia acontecido. Nossos celulares tinham quebrado, e parecia que aquele dia tinha deixado marcas muito maiores do que qualquer uma de nós poderia imaginar quando saímos de casa.
+
+Eu não queria ter visto você machucada.
+
+Não queria que aquele passeio, que eu tanto desejava compartilhar com você, terminasse daquela maneira. E, quando penso que você não estava com tanta vontade de ir, uma parte de mim ainda sente tristeza e se pergunta por que insisti tanto.
+
+Às vezes, acabo carregando esse acontecimento dentro de mim como se tivesse sido minha responsabilidade impedir tudo o que aconteceu. Penso que você poderia ter ficado em casa e que talvez não tivéssemos passado por aquilo.
+
+É difícil não pensar nessas coisas quando a pessoa que amamos também acaba envolvida em um momento tão doloroso.
+
+Mas existe algo que também guardo daquela lembrança: quando tudo aconteceu, você não era apenas a pessoa que eu amava e desejava chamar de minha namorada. Você era a pessoa que estava ali comigo.
+
+E eu também estava ali por você.
+
+Não escolhemos aquele acidente. Não escolhemos sentir medo, preocupação ou dor. Mas, no meio de tudo aquilo, fomos duas pessoas tentando cuidar uma da outra.
+
+Depois, você veio à minha casa. Pedi que jantasse comigo, e você ficou. Mais tarde, precisou voltar para casa porque sua família já estava preocupada, e você estava sentindo muita dor.
+
+Eu também estava preocupada com você.
+
+Queria saber se estava bem, queria que aquela dor passasse e queria poder ter certeza de que você ficaria bem. Porque, quando amamos alguém, até as coisas mais simples mudam de significado. Uma refeição compartilhada, uma conversa, a presença da pessoa ao nosso lado: tudo isso se torna precioso quando percebemos como a vida pode mudar de repente.
+
+Aquele dia ficou marcado em mim por muitos motivos.
+
+Pelo passeio que eu tanto queria fazer com você. Pelo jogo. Pelo acidente. Pelo medo de ver você machucada. Pela preocupação no hospital. Pelos nossos celulares quebrados. Pela lembrança de termos enfrentado tudo aquilo juntas.
+
+E, principalmente, pela certeza de que eu não queria estar ao seu lado apenas quando tudo desse certo.
+
+Eu queria estar com você quando os dias fossem leves, quando tivéssemos motivos para sorrir e quando a vida nos apresentasse dificuldades que não soubéssemos como enfrentar.
+
+Queria aprender a cuidar de você, respeitar seus sentimentos e encontrar maneiras de tornar os dias difíceis um pouco menos pesados.
+
+Não porque o amor possa impedir todas as coisas ruins de acontecerem, mas porque acredito que podemos oferecer uma à outra carinho, apoio e companhia quando elas acontecem.
+
+Eu queria viver com você na alegria e na tristeza. E, naquele dia, compreendi ainda mais o quanto essa vontade era verdadeira.
+
+Eu não queria que nossa história tivesse aquela lembrança. Se pudesse escolher, teria levado você ao interior, teria jogado minha bola, teria mostrado todos os lugares que queria mostrar e teria voltado para casa com você sem que nada de ruim tivesse acontecido.
+
+Mas não posso mudar aquele dia.
+
+Posso apenas reconhecer o que senti, cuidar das lembranças que ficaram e continuar aprendendo a viver o nosso amor.
+
+E, se há algo que desejo que você saiba ao ler estas páginas, é que nunca quis que você sofresse. Eu só queria compartilhar a minha felicidade com você.
+
+Você foi comigo porque, no fim, decidiu viver aquele momento ao meu lado. E, quando o dia deixou de ser aquilo que imaginávamos, continuamos ali, uma com a outra.
+
+Talvez seja por isso que essa lembrança tenha um lugar tão importante na nossa história.
+
+Não porque precisássemos sofrer para provar o nosso amor, mas porque, em um momento em que estávamos assustadas e preocupadas, descobrimos o quanto a presença uma da outra significava.
+
+Eu queria mostrar a você um lugar especial da minha vida. Naquele dia, porém, a vida me mostrou mais uma vez o quanto você era especial para mim.
+
+E eu só desejava que ficássemos bem, que você ficasse bem e que ainda pudéssemos viver muitos outros dias juntas, com muito mais sorrisos do que lágrimas.
+
+Porque eu amo você, Hemmilly.
+
+E quero continuar escrevendo nossa história ao seu lado, não apenas nas páginas bonitas, mas também naquelas em que precisamos respirar fundo, segurar a mão uma da outra e seguir em frente. 💜`
+},
+{
+  title: "Entre o Orgulho, as Diferenças e a Escolha de Continuar",
+  text: `Com o passar do tempo, fui descobrindo que amar alguém não significa que tudo será perfeito. No começo, a gente se encanta com os detalhes, com os momentos bons, com as palavras bonitas e com a felicidade de finalmente ter aquela pessoa ao nosso lado. Mas, conforme o relacionamento cresce, também começamos a conhecer aquilo que não aparece nos primeiros capítulos da história.
+
+As diferenças.
+
+As manias.
+
+Os defeitos.
+
+E, principalmente, o orgulho.
+
+Eu e a Hemmilly somos duas pessoas que se amam muito, mas que também têm suas dificuldades. Às vezes, pensamos diferente, enxergamos uma mesma situação de maneiras opostas e acabamos discutindo por coisas que, no fundo, nascem justamente do quanto nos importamos uma com a outra.
+
+Uma das nossas maiores dificuldades é o orgulho. Nós duas temos esse defeito, e eu sei que, em alguns momentos, ele acaba tornando as coisas mais complicadas do que precisariam ser.
+
+A Hemmilly tem um coração que quer cuidar de todo mundo. Ela tem essa mania de querer ajudar, de se preocupar, de tentar proteger quem ama. Eu, por outro lado, tenho uma dificuldade enorme em aceitar ajuda. Gosto de resolver minhas coisas, de mostrar que consigo me virar sozinha e, às vezes, não percebo que permitir que alguém cuide de mim também é uma forma de amar.
+
+E foi justamente essa diferença que nos ensinou uma das nossas lições mais importantes.
+
+A madrugada em que o orgulho falou mais alto
+
+Teve um dia em que voltamos de um interior e fomos a um bingo de uma amiga nossa, tia dela. Já eram duas horas da madrugada quando chegou a hora de ir embora.
+
+Minha família estava um pouco alcoolizada, e eu não queria voltar de moto com eles. Minha vontade era ir a pé, porque conhecia o caminho e as pessoas daquela região. Na minha cabeça, estava tudo bem. Eu conhecia o lugar e acreditava que conseguiria chegar sem problemas.
+
+Mas, para a Hemmilly, não era tão simples assim.
+
+Ela não queria que eu fosse a pé de jeito nenhum. Estava preocupada comigo e insistia para que eu não fosse sozinha naquela hora. Eu tentava explicar que não precisava se preocupar, que eu conhecia o caminho e que sabia o que estava fazendo.
+
+Só que ela não conseguia ficar tranquila.
+
+E eu, em vez de entender completamente a preocupação dela, insistia em mostrar que conseguia cuidar de mim mesma.
+
+Foi assim que começamos a discutir.
+
+Ela queria que eu dormisse na casa dela, mas eu não queria ficar lá porque a avó dela estava presente, e eu sabia que ela não gostava de mim. Aquilo também pesava na minha decisão, mesmo que a Hemmilly desejasse que eu ficasse.
+
+Ela ficou chateada porque sentia que abria mão de algumas coisas para estar comigo, enquanto eu nem sempre parecia disposta a fazer o mesmo por ela.
+
+E essa parte me marcou.
+
+Porque, enquanto eu estava preocupada em defender minha vontade, ela estava tentando encontrar uma maneira de me manter perto e, acima de tudo, segura.
+
+Depois de muita conversa e discussão, ela me pediu pelo menos para ir de moto. E eu fui, porque não queria que ela continuasse tão preocupada.
+
+Mas a discussão não terminou ali dentro de nós. Ela continuou chateada, e eu fiquei com aquela sensação ruim de saber que a pessoa que eu mais queria ver bem estava magoada comigo.
+
+Naquela madrugada, percebi que nem sempre basta ter boas intenções. Às vezes, duas pessoas podem querer coisas diferentes sem que nenhuma delas deixe de amar a outra. O problema começa quando o orgulho impede que elas enxerguem o que existe por trás das atitudes.
+
+Ela estava tentando cuidar de mim.
+
+Eu estava tentando mostrar que podia cuidar de mim mesma.
+
+E, no meio disso tudo, nós duas acabamos sofrendo.
+
+Eu nunca quis que o nosso orgulho fosse maior que o nosso amor
+
+Existe uma coisa sobre mim que a Hemmilly talvez conheça melhor do que muita gente: eu sou muito apaixonada pela minha mulher.
+
+E, quando vejo que ela está chateada comigo, não consigo simplesmente agir como se nada estivesse acontecendo. Não gosto de saber que existe uma tristeza entre nós, principalmente quando sei que podemos conversar e tentar resolver as coisas.
+
+No dia seguinte, eu fui conversar com ela.
+
+Chamei minha menina para que pudéssemos falar sobre o que tinha acontecido. Eu não queria que aquela discussão se transformasse em mais uma ferida guardada entre nós. Queria que ela me escutasse, mas também queria escutar o lado dela. Queria que a gente encontrasse uma maneira de se entender.
+
+E foi isso que fizemos.
+
+Ela me ouviu, conversamos e conseguimos nos resolver.
+
+Talvez, para quem olha de fora, tenha sido apenas uma discussão de casal. Mas, para mim, aquele momento também fez parte do nosso aprendizado. Porque um relacionamento não é construído apenas quando duas pessoas estão felizes, de mãos dadas, vivendo momentos bonitos.
+
+Ele também é construído quando uma magoa a outra sem querer, quando surgem diferenças, quando é preciso reconhecer que nem sempre estamos certas e quando escolhemos sentar para conversar, mesmo depois de uma noite difícil.
+
+Eu não quero um relacionamento em que nunca existam discussões. Quero um relacionamento em que nenhuma discussão seja maior do que a nossa vontade de nos entender.
+
+Quero aprender a aceitar o cuidado dela sem sentir que estou perdendo minha independência. Quero que ela também consiga compreender minhas dificuldades, assim como eu quero aprender a compreender as dela.
+
+Porque amar não é deixar de ser quem somos. É aprender a construir um nós sem apagar o eu de nenhuma das duas.
+
+O nosso amor também precisa aprender
+
+Eu e a Hemmilly ainda temos muito para aprender uma com a outra.
+
+Ainda temos diferenças, ainda temos nossos momentos de orgulho e ainda existem coisas que precisamos melhorar. Não vou dizer que somos perfeitas, porque não somos. E talvez seja justamente isso que torne a nossa história tão verdadeira.
+
+Nós não estamos juntas porque sabemos fazer tudo certo. Estamos construindo uma relação em que precisamos aprender, conversar, reconhecer nossos erros e encontrar maneiras melhores de lidar com aquilo que nos machuca.
+
+Uma das coisas que mais valorizo em nós é que não queremos ficar brigadas por muito tempo. Não queremos deixar o silêncio crescer entre nós quando podemos tentar resolver as coisas com diálogo. Mesmo quando o orgulho aparece, existe em nós a vontade de encontrar o caminho de volta uma para a outra.
+
+E eu quero continuar cultivando isso.
+
+Quero aprender que aceitar ajuda não me torna menos capaz. Quero que ela saiba que minha dificuldade em ceder não significa que eu não a ame. Quero que, aos poucos, a gente consiga entender melhor as intenções por trás das atitudes, sem deixar que uma discussão faça parecer que todo o nosso amor desapareceu.
+
+Porque ele não desaparece.
+
+Ele precisa de cuidado, de paciência e de responsabilidade. Precisa de duas pessoas dispostas a melhorar, não apenas para manter um relacionamento, mas para que esse relacionamento seja bom para as duas.
+
+Se ainda estamos aqui, é porque queremos continuar
+
+Hoje, quando penso em tudo isso, entendo que a nossa história não é feita apenas dos momentos em que tudo dá certo.
+
+Ela também é feita das conversas difíceis, das diferenças que estamos aprendendo a respeitar, das vezes em que o orgulho precisa dar espaço à compreensão e das reconciliações que nos lembram por que vale a pena tentar de novo.
+
+Eu amo a Hemmilly. Amo minha mulher, minha companheira, minha rainha de roxo. Mas também sei que amar alguém de verdade significa reconhecer que essa pessoa não pensa exatamente como nós, não sente tudo da mesma maneira e não tem a obrigação de adivinhar aquilo que não conseguimos dizer.
+
+Nós precisamos conversar. Precisamos escutar. Precisamos aprender a ceder sem sentir que estamos perdendo e a colocar limites sem fazer a outra pessoa se sentir menos amada.
+
+Eu não sei quantas dificuldades ainda vamos encontrar pelo caminho. Não sei quantas vezes teremos de respirar fundo, conversar e reconhecer nossos erros.
+
+Mas sei o tipo de relacionamento que quero construir com ela: um amor verdadeiro, em que as duas possam ser ouvidas, em que nenhuma precise esconder o que sente e em que os problemas sejam enfrentados juntas, sem esquecer que ambas merecem respeito e compreensão.
+
+Porque, para mim, estar com a Hemmilly nunca significou viver uma história sem dificuldades.
+
+Significa ter encontrado alguém com quem quero aprender a atravessá-las.
+
+E talvez seja isso que faça a nossa história ser tão nossa: não somos duas pessoas que nunca se desentendem. Somos duas pessoas que estão aprendendo que amar também é escutar, compreender, reconhecer os próprios defeitos e escolher construir algo melhor juntas.
+
+A nossa história não é perfeita.
+
+Mas é verdadeira.
+
+E eu ainda quero escrever muitas páginas ao lado da minha rainha de roxo.
+
+Porque, no fim, eu não quero apenas continuar com ela. Quero continuar aprendendo a amar cada vez melhor a mulher que escolhi para estar ao meu lado. 💜`
+},
+{
+  title: "A Melhor Escolha da Minha Vida",
+  text: `Se alguém me perguntasse hoje o que eu quero para o meu futuro, eu não precisaria pensar muito para responder.
+
+Eu quero a Hemmilly.
+
+Quero a minha mulher nos meus planos, nos meus sonhos, nas minhas conquistas e até naqueles dias em que nada parece dar certo. Quero olhar para o futuro e saber que ainda teremos tantas histórias para contar, tantas lembranças para guardar e tantos motivos para agradecer por termos nos encontrado.
+
+Eu converso muito com ela sobre o nosso futuro. Às vezes, fico imaginando tudo aquilo que ainda podemos viver juntas, e é engraçado pensar que uma pessoa pode chegar à nossa vida e, pouco a pouco, deixar de ser apenas alguém que amamos para se tornar alguém com quem queremos dividir tudo.
+
+A Hemmilly é uma pessoa muito especial para mim. Eu a vejo como uma mulher madura, com muita experiência de vida, alguém que tem coisas a me ensinar e com quem posso continuar aprendendo. Admiro a maneira como ela enxerga muitas situações, a forma como se preocupa comigo e, principalmente, como me apoia nos meus sonhos.
+
+Porque uma das coisas mais bonitas que encontrei nela foi isso: o apoio.
+
+Eu tenho meus sonhos, minhas vontades e meus objetivos. Tenho o futebol, que é uma parte tão importante de quem sou. E a Hemmilly está comigo nisso. Ela me apoia, acredita nos meus sonhos e me incentiva a continuar buscando aquilo que quero para a minha vida.
+
+E vocês não imaginam o quanto isso significa para mim.
+
+É maravilhoso encontrar alguém que não quer diminuir os seus sonhos para caber na própria vida, mas que quer ver você crescer e conquistar o mundo do seu jeito. Alguém que entende que amar também é incentivar, acreditar e comemorar as vitórias da pessoa que está ao seu lado.
+
+Eu quero continuar no futebol. Quero conquistar minhas coisas, realizar meus objetivos e viver muitas experiências. E quero poder olhar para o lado e encontrar a minha mulher comigo, assim como quero estar ao lado dela para apoiar os sonhos que ela também deseja realizar.
+
+Não quero que apenas uma de nós cresça. Quero que a gente cresça juntas.
+
+A casa que existe nos meus sonhos
+
+Quando penso no nosso futuro, não imagino apenas grandes conquistas. Na verdade, algumas das coisas que mais desejo são as mais simples.
+
+Eu sonho com a gente tendo a nossa casa. Uma casa boa, construída com o nosso esforço, com as nossas conquistas e com tudo aquilo que um dia vamos poder chamar de nosso.
+
+Imagino a gente chegando em casa depois de um dia cansativo, contando como foi o dia uma da outra, dividindo as responsabilidades e encontrando conforto na presença de quem escolhemos amar.
+
+Imagino cachorros correndo pela casa, gatos espalhados pelos cantinhos e aquela bagunça boa de um lar cheio de vida.
+
+Imagino a gente construindo uma família.
+
+Sim, uma família nossa.
+
+Eu sei que o caminho para duas mulheres terem filhos pode apresentar dificuldades e exigir planejamento, possibilidades que precisaremos conhecer e decisões que tomaremos juntas. Mas, quando penso nesse sonho, o que mais importa para mim é a vontade de construir uma família ao lado da mulher que amo.
+
+Não é apenas sobre ter uma casa bonita, animais ou filhos. É sobre ter um lugar onde exista amor, respeito, cuidado e liberdade para sermos quem somos.
+
+Quero que a nossa casa seja um lugar em que as duas possam descansar do mundo. Um lugar onde possamos conversar sobre nossos problemas, comemorar nossas conquistas, aprender com nossos erros e continuar descobrindo maneiras de fazer a nossa relação crescer.
+
+Quero olhar para tudo aquilo que construímos e pensar: nós conseguimos.
+
+Conseguimos porque sonhamos, porque nos esforçamos e porque, mesmo tendo nossas diferenças, escolhemos trabalhar juntas pelos nossos planos.
+
+E, se um dia esse sonho se tornar realidade, quero me lembrar de que tudo começou muito antes das paredes da nossa casa. Começou nas nossas conversas, nas nossas lembranças, na nossa primeira dança, no nosso primeiro beijo e naquela espera que, apesar de difícil, valeu a pena.
+
+A mulher com quem quero me casar
+
+Hemmilly, eu quero me casar com você.
+
+Quero poder olhar para você e lembrar de tudo o que vivemos até chegar ali. Quero me lembrar de quando éramos apenas duas pessoas se aproximando, de quando comecei a perceber que você era diferente e de todas as vezes em que imaginei como seria ter você comigo.
+
+Hoje, poder chamar você de minha namorada é uma felicidade que não quero tratar como algo pequeno.
+
+Eu sei que ainda temos muito para aprender. Sei que existem diferenças entre nós, que às vezes o orgulho aparece e que nem sempre vamos concordar com tudo. Mas também sei que quero continuar aprendendo a conversar com você, a compreender suas preocupações e a encontrar maneiras de cuidar melhor daquilo que estamos construindo.
+
+Não quero prometer que nunca vamos enfrentar dificuldades. Quero que a gente tenha coragem de conversar quando elas aparecerem, que nenhuma das duas precise deixar de ser quem é e que nossos sonhos individuais continuem tendo espaço dentro dos nossos sonhos juntas.
+
+Quero que você continue sendo a Hemmilly, com a sua personalidade, suas vontades, seus planos e seu jeito de enxergar a vida.
+
+E quero continuar sendo eu, com os meus sonhos, o meu futebol, as minhas manias e tudo aquilo que ainda estou aprendendo sobre mim mesma.
+
+Porque eu não quero apenas uma vida ao seu lado. Quero construir com você uma vida em que nós duas possamos ser felizes, crescer e nos orgulhar daquilo que estamos vivendo.
+
+Você é a mulher que eu escolho para compartilhar meus sonhos. A mulher com quem imagino uma casa, uma família e um futuro cheio de histórias que ainda nem começamos a escrever.
+
+E, quando penso em tudo isso, meu coração só consegue imaginar uma coisa: eu quero que seja você.
+
+Se um dia você sentir saudade de mim
+
+Existe algo que também quero deixar escrito nestas páginas.
+
+Eu queria que este livro fosse mais do que uma lembrança bonita do nosso relacionamento. Quero que ele guarde a nossa história de verdade.
+
+Quero que você possa voltar aqui e se lembrar do nosso começo, do nosso meio, das dificuldades que enfrentamos, das coisas que aprendemos e de tudo aquilo que fez o nosso amor ser tão especial para mim.
+
+Quero que você se lembre da menina que conheceu você, que começou a conversar com você, que viu você de roxo e que, sem imaginar tudo o que ainda viveriam juntas, começou a guardar você em um lugar cada vez mais especial do coração.
+
+Quero que você se lembre da nossa primeira dança, do nosso primeiro beijo, das flores roxas, das conversas e dos pequenos detalhes que talvez outras pessoas nunca tenham percebido.
+
+Quero que você se lembre também de que não fomos perfeitas. Que tivemos nossas dificuldades, nossas diferenças e nossos momentos de orgulho. Mas que existiu uma menina que queria aprender a amar você cada vez melhor.
+
+E, se algum dia você sentir saudade ao reler estas páginas, espero que encontre aqui um pedacinho da nossa história capaz de trazer um sorriso ao seu rosto.
+
+Eu não sei tudo o que a vida nos reserva. Não conheço cada caminho que vamos percorrer nem todas as surpresas que ainda nos esperam.
+
+Mas sei que o que vivemos até aqui merece ser lembrado.
+
+Por isso, escrevi este livro. Para que a nossa história não fique guardada apenas na memória, mas também nestas páginas que você poderá abrir e reler.
+
+Para que você saiba como foi importante para mim. Para que nunca tenha dúvidas de que os nossos momentos, os nossos sonhos e tudo aquilo que construímos tiveram um significado enorme na minha vida.
+
+E, acima de tudo, para que você nunca se esqueça de que foi amada de uma maneira muito verdadeira.
+
+Minha rainha de roxo, minha melhor escolha
+
+Hemmilly, se eu pudesse voltar ao começo da nossa história sabendo tudo o que sei hoje, com todas as dificuldades, as diferenças, as conversas e os momentos que ainda viveríamos, eu ainda iria querer conhecer você.
+
+Ainda iria querer viver a nossa primeira dança.
+
+Ainda iria querer aquele primeiro beijo.
+
+Ainda iria querer descobrir, pouco a pouco, a mulher que existe por trás desse nome que se tornou tão importante para mim.
+
+Porque você não entrou na minha vida apenas para fazer parte de algumas lembranças bonitas. Você se tornou parte dos meus planos, dos meus sonhos e da maneira como imagino o meu futuro.
+
+Eu quero conquistar minhas coisas com você. Quero comemorar suas vitórias, apoiar seus sonhos e encontrar maneiras de fazer você se sentir tão apoiada quanto me sinto quando você acredita em mim.
+
+Quero a nossa casa, os nossos animais, a nossa família e todas aquelas pequenas coisas que talvez pareçam simples para outras pessoas, mas que, para mim, significam o mundo quando imagino vivendo ao seu lado.
+
+Quero me casar com você.
+
+Quero continuar descobrindo quem somos, individualmente e juntas.
+
+Quero que a gente tenha muitas páginas pela frente.
+
+E, se existe uma coisa que aprendi durante toda essa história, é que o amor não se resume a encontrar alguém com quem sonhar. Também é aprender a construir, dia após dia, uma relação que respeite as duas pessoas que escolheram compartilhar esses sonhos.
+
+Eu amo você, Hemmilly.
+
+Amo a mulher que você é, admiro a maneira como me apoia e sou feliz por poder chamar você de minha mulher.
+
+E, entre tantas possibilidades que a vida poderia ter me apresentado, existe uma escolha que guardo com um carinho que nem todas estas páginas seriam suficientes para explicar.
+
+Você foi a melhor escolha que eu já tive na minha vida.
+
+Minha rainha de roxo, minha Hemmilly, meu amor.
+
+Se o nosso começo foi uma surpresa, se o nosso meio foi feito de aprendizados e se ainda temos tanto para viver, então quero que o nosso futuro seja escrito com carinho, respeito, diálogo e muitos sonhos realizados.
+
+Não sei quantas páginas a vida ainda vai nos dar.
+
+Mas, enquanto estivermos escrevendo a nossa história, quero continuar escolhendo construir algo bonito com você.
+
+E espero que, quando você terminar de ler este livro, consiga entender o que tentei dizer em cada capítulo.
+
+Você não foi apenas uma parte bonita da minha história.
+
+Você é a pessoa com quem eu sonho em construir tantas outras.
+
+Eu te amo, minha rainha de roxo. E, se você me perguntar qual foi uma das escolhas mais bonitas que já fiz na vida, a minha resposta sempre será você.
+
+Com todo o amor que existe em mim,
+
+Da sua Tayanee, para a sua Hemmilly. 💜`
+}
+];
+
+const pages = [];
+
+chapters.forEach((chapter, chapterIndex) => {
+  const paragraphs = chapter.text.trim().split(/\n\s*\n/);
+  let currentPage = "";
+  let firstPage = true;
+
+  function savePage() {
+    if (!currentPage.trim()) return;
+    pages.push({
+      chapter: chapterIndex,
+      chapterTitle: chapter.title,
+      title: firstPage ? chapter.title : "",
+      text: currentPage.trim()
+    });
+    firstPage = false;
+    currentPage = "";
+  }
+
+  paragraphs.forEach(paragraph => {
+    const sentences = paragraph.trim().split(/(?<=[.!?])\s+/);
+
+    sentences.forEach(sentence => {
+      if (currentPage.length + sentence.length > 750 && currentPage) {
+        savePage();
+      }
+
+      currentPage += (currentPage ? " " : "") + sentence;
+    });
+
+    currentPage += "\n\n";
+  });
+
+  savePage();
+});
+
+let currentPageIndex = 0;
+
+function renderPage() {
+  const page = pages[currentPageIndex];
+  const chapter = chapters[page.chapter];
+
+  document.getElementById("chapterLabel").textContent =
+    "Capítulo " + (page.chapter + 1);
+
+  document.getElementById("pageTitle").textContent =
+    page.title || chapter.title;
+
+  const pageText = document.getElementById("pageText");
+  pageText.replaceChildren();
+
+  page.text.split(/\n\s*\n/).forEach(paragraph => {
+    if (!paragraph.trim()) return;
+
+    const p = document.createElement("p");
+    p.textContent = paragraph.trim();
+
+    if (paragraph.trim().startsWith("“")) {
+      p.className = "opening";
+    }
+
+    pageText.appendChild(p);
+  });
+
+  document.getElementById("pageCounter").textContent =
+    "Página " + (currentPageIndex + 1) + " de " + pages.length;
+
+  document.getElementById("prevBtn").disabled =
+    currentPageIndex === 0;
+
+  document.getElementById("nextBtn").disabled =
+    currentPageIndex === pages.length - 1;
+
+  document.getElementById("progress").style.width =
+    ((currentPageIndex + 1) / pages.length * 100) + "%";
+
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function changePage(direction) {
+  const nextIndex = currentPageIndex + direction;
+
+  if (nextIndex < 0 || nextIndex >= pages.length) return;
+
+  currentPageIndex = nextIndex;
+  renderPage();
+}
+
+document.addEventListener("keydown", event => {
+  if (event.key === "ArrowRight") changePage(1);
+  if (event.key === "ArrowLeft") changePage(-1);
+});
+
+renderPage();
+</script>
+
+  
+<style>
+/* LIVRO INTEIRO COM PAPEL ANTIGO */
+body {
+  background: #e8cf91 !important;
+  color: #573d26;
+}
+
+#livro, .livro, .book, .pagina, .page, .page-content {
+  background: #f2dfad !important;
+  color: #573d26 !important;
+  border-color: #c5a66a !important;
+}
+
+/* CAPA */
+#capaLivro {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 22px;
+  background: #e8cf91;
+  color: #573d26;
+  box-sizing: border-box;
+}
+
+.capa-conteudo {
+  width: 100%;
+  max-width: 420px;
+  min-height: 75vh;
+  box-sizing: border-box;
+  padding: 35px 20px;
+  border: 2px solid #a98a53;
+  outline: 1px solid #c3a36a;
+  outline-offset: -9px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: #f2dfad;
+}
+
+.capa-ursinho {
+  font-size: 42px;
+  line-height: 1.3;
+  margin-bottom: 14px;
+}
+
+.capa-titulo {
+  font-family: Georgia, serif;
+  font-size: 38px;
+  line-height: 1.2;
+  font-weight: normal;
+  color: #68462d;
+  margin: 0;
+}
+
+.capa-frase {
+  font-family: Georgia, serif;
+  font-size: 16px;
+  font-style: italic;
+  margin-top: 22px;
+  color: #795b3a;
+}
+
+.capa-botao {
+  margin-top: 35px;
+  padding: 12px 24px;
+  background: #795b3a;
+  color: #fff0cc;
+  border: 1px solid #68462d;
+  font-family: Georgia, serif;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.capa-botao:active {
+  transform: scale(0.98);
+}
+</style>
+
+
+<div id="capaLivro">
+  <div class="capa-conteudo">
+
+    <div class="capa-ursinho">🧸</div>
+
+    <h1 class="capa-titulo" style="color: #71358a;">
+      Minha Rainha de Roxo III
+    </h1>
+
+    <p class="capa-frase">
+      Uma história escrita com amor.
+    </p>
+
+    <button class="capa-botao"
+      onclick="document.getElementById('capaLivro').style.display='none'">
+      Comece a ler 💜
+    </button>
+
+  </div>
+</div>
+
+  
+<style>
+/* PÁGINAS ANTIGAS OCUPANDO A TELA TODA */
+html, body {
+  margin: 0 !important;
+  padding: 0 !important;
+  width: 100% !important;
+  min-height: 100% !important;
+  background: #efd9a2 !important;
+  overflow-x: hidden !important;
+}
+
+#livro, .livro, .book, .pagina, .page, .page-content {
+  box-sizing: border-box !important;
+  width: 100% !important;
+  max-width: none !important;
+  min-height: 100vh !important;
+  margin: 0 !important;
+  padding: 28px 22px 100px !important;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  background: #efd9a2 !important;
+  color: #513921 !important;
+  position: relative;
+}
+
+/* TEXTO GRANDE E CONFORTÁVEL */
+#livro p, .livro p, .book p,
+.pagina p, .page p, .page-content p {
+  font-family: Georgia, serif !important;
+  font-size: 20px !important;
+  line-height: 1.9 !important;
+  text-align: justify !important;
+  overflow-wrap: break-word;
+}
+
+/* BOTÕES NO FINAL DO TEXTO */
+#prevBtn, #nextBtn,
+#anterior, #proxima,
+.prev-btn, .next-btn,
+button.anterior, button.proxima {
+  position: static !important;
+  display: inline-block !important;
+  margin: 24px 6px 18px !important;
+  padding: 12px 20px !important;
+  background: #795b3a !important;
+  color: #fff0cc !important;
+  border: 1px solid #68462d !important;
+  border-radius: 5px !important;
+  font-size: 16px !important;
+}
+
+/* ANIMAÇÕES DECORATIVAS */
+.decoracao-voadora {
+  position: fixed;
+  z-index: 5;
+  pointer-events: none;
+  user-select: none;
+  font-size: 27px;
+  animation: voar 16s linear infinite;
+}
+
+.borboleta1 { top: 18%; animation-delay: 0s; }
+.borboleta2 { top: 42%; animation-delay: -7s; font-size: 22px; }
+
+@keyframes voar {
+  0%   { left: -50px; transform: translateY(0) rotate(0deg); }
+  25%  { transform: translateY(-18px) rotate(8deg); }
+  50%  { transform: translateY(12px) rotate(-8deg); }
+  75%  { transform: translateY(-12px) rotate(6deg); }
+  100% { left: 110%; transform: translateY(0) rotate(0deg); }
+}
+
+.elefantes-caminhando {
+  position: fixed;
+  bottom: 8px;
+  left: -100px;
+  z-index: 5;
+  pointer-events: none;
+  font-size: 30px;
+  white-space: nowrap;
+  animation: caminhar 32s linear infinite;
+}
+
+@keyframes caminhar {
+  from { left: -100px; }
+  to { left: 110%; }
+}
+</style>
+
+<div class="decoracao-voadora borboleta1">🦋</div>
+<div class="decoracao-voadora borboleta2">🦋</div>
+<div class="elefantes-caminhando">🐘　🐘</div>
+
+
+<style>
+/* LETRAS UM POUCO MAIORES */
+#livro p,
+.livro p,
+.book p,
+.pagina p,
+.page p,
+.page-content p {
+  font-size: 22px !important;
+  line-height: 1.9 !important;
+}
+
+/* BOTÕES ROXOS */
+#prevBtn, #nextBtn,
+#anterior, #proxima,
+.prev-btn, .next-btn,
+button.anterior, button.proxima {
+  background: #71358a !important;
+  color: #ffffff !important;
+  border: 1px solid #542469 !important;
+  border-radius: 8px !important;
+  padding: 13px 22px !important;
+  font-size: 17px !important;
+  font-weight: bold !important;
+}
+</style>
+
+
+<style>
+/* LETRAS BEM MAIORES */
+#livro p,
+.livro p,
+.book p,
+.pagina p,
+.page p,
+.page-content p {
+  font-size: 25px !important;
+  line-height: 1.9 !important;
+}
+
+/* BOTÕES ROXOS JUNTINHOS */
+#prevBtn, #nextBtn,
+#anterior, #proxima,
+.prev-btn, .next-btn,
+button.anterior, button.proxima {
+  background: #71358a !important;
+  color: #ffffff !important;
+  border: 1px solid #542469 !important;
+  border-radius: 8px !important;
+  padding: 13px 18px !important;
+  margin: 5px 3px !important;
+  font-size: 17px !important;
+  font-weight: bold !important;
+}
+
+/* APROXIMA OS BOTÕES */
+#prevBtn, #nextBtn,
+#anterior, #proxima,
+.prev-btn, .next-btn,
+button.anterior, button.proxima {
+  display: inline-block !important;
+  position: static !important;
+}
+
+</style>
+
+
+<style>
+/* DEIXAR OS DOIS BOTÕES JUNTOS NO CENTRO */
+#prevBtn, #nextBtn,
+#anterior, #proxima,
+.prev-btn, .next-btn,
+button.anterior, button.proxima {
+  display: inline-flex !important;
+  width: auto !important;
+  min-width: 0 !important;
+  margin: 5px 2px !important;
+  padding: 12px 16px !important;
+  position: static !important;
+  float: none !important;
+}
+
+/* REMOVER ESPAÇO EXAGERADO DO CONTÊINER */
+.navigation, .navegacao, .page-navigation,
+.pagination, .botoes-navegacao {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  gap: 4px !important;
+  width: 100% !important;
+}
+</style>
+
+  
+<style>
+.borboleta3 {
+  top: 60% !important;
+  animation-delay: -4s !important;
+  font-size: 25px !important;
+}
+
+.borboleta4 {
+  top: 78% !important;
+  animation-delay: -11s !important;
+  font-size: 23px !important;
+}
+</style>
+
+<div class="decoracao-voadora borboleta3">🦋</div>
+<div class="decoracao-voadora borboleta4">🦋</div>
+
+
+<style>
+/* TÍTULO MAIOR E ROXO MAIS BONITO */
+.capa-titulo {
+  color: #7827a8 !important;
+  font-size: 46px !important;
+  line-height: 1.2 !important;
+  font-weight: bold !important;
+}
+
+/* BOTÃO ROXO COM LETRAS MAIORES */
+.capa-botao {
+  background: #7827a8 !important;
+  color: #ffffff !important;
+  border: 2px solid #5b197f !important;
+  font-size: 21px !important;
+  font-weight: bold !important;
+  padding: 16px 28px !important;
+  border-radius: 10px !important;
+}
+</style>
+
+  
+</body>
+</html>
